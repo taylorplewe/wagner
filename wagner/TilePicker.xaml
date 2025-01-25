@@ -1,0 +1,123 @@
+﻿<Window x:Class="Wagner.TilePicker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wagner"
+        mc:Ignorable="d"
+        Title="Tile picker"
+		Name="window_tile_picker"
+		Style="{StaticResource style_window}"
+		ResizeMode="NoResize"
+		SizeToContent="WidthAndHeight"
+		BorderThickness="1" MouseDown="window_tile_picker_MouseDown" AllowsTransparency="True" KeyDown="window_tile_picker_KeyDown" Activated="window_tile_picker_Activated" KeyUp="window_tile_picker_KeyUp">
+	<Grid>
+		<StackPanel Orientation="Vertical">
+			<Grid x:Name="grid_top_bar" Background="Transparent">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+                <Label x:Name="label_title" Style="{StaticResource style_title_label}">Tile picker</Label>
+				<Button x:Name="button_close" Style="{StaticResource style_button_window_control}" Grid.Column="2" Click="button_close_Click">×</Button>
+			</Grid>
+			<StackPanel Orientation="Horizontal">
+				<StackPanel x:Name="panel_palettes" Width="64" Margin="10,10,0,0">
+					<!-- background palettes -->
+					<Canvas x:Name="canvas_palette_1" Height="64" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_pal_1_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_1_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_1_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_1_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_1_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					<Canvas x:Name="canvas_palette_2" Margin="0,10,0,0" Height="64" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_pal_2_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_2_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_2_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_2_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_2_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					<Canvas x:Name="canvas_palette_3" Margin="0,10,0,0" Height="64" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_pal_3_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_3_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_3_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_3_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_3_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					<Canvas x:Name="canvas_palette_4" Margin="0,10,0,0" Height="64" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_pal_4_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_4_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_4_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_4_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_pal_4_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					
+					<!-- sprite palettes -->
+					<Canvas x:Name="canvas_spr_palette_1" Height="64" Margin="0,24,0,0" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_spr_pal_1_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_1_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_1_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_1_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_1_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					<Canvas x:Name="canvas_spr_palette_2" Margin="0,10,0,0" Height="64" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_spr_pal_2_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_2_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_2_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_2_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_2_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					<Canvas x:Name="canvas_spr_palette_3" Margin="0,10,0,0" Height="64" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_spr_pal_3_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_3_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_3_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_3_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_3_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					<Canvas x:Name="canvas_spr_palette_4" Margin="0,10,0,0" Height="64" MouseLeftButtonDown="canvas_palette_MouseLeftButtonDown" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave">
+						<Rectangle x:Name="rect_spr_pal_4_1" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_4_2" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="16" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_4_3" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="32" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_4_4" MouseLeftButtonDown="PaletteColClick" MouseEnter="PaletteMouseEnter" MouseLeave="PaletteMouseLeave" Canvas.Top="48" Width="64" Height="16"/>
+						<Rectangle x:Name="rect_spr_pal_4_sel" Width="64" Height="64" Stroke="White" StrokeThickness="4" Visibility="Hidden"/>
+					</Canvas>
+					
+					<Button x:Name="button_pal_edit" Margin="0,24,0,0" Click="button_pal_edit_Click">Edit</Button>
+				</StackPanel>
+				<StackPanel Orientation="Vertical">
+					<StackPanel Orientation="Horizontal" Margin="10">
+						<Canvas x:Name="canvas_chr" Margin="0,0,0,0" Width="512" Height="512" MouseWheel="canvas_chr_MouseWheel" MouseMove="canvas_chr_MouseMove" MouseLeave="canvas_chr_MouseLeave" MouseEnter="canvas_chr_MouseEnter" MouseLeftButtonDown="canvas_chr_MouseLeftButtonDown" MouseRightButtonDown="canvas_chr_MouseRightButtonDown">
+							<Canvas.Clip>
+								<RectangleGeometry Rect="0,0,512,512"/>
+							</Canvas.Clip>
+							<Canvas x:Name="canvas_chr_scroll" Canvas.Top="0">
+								<Image x:Name="img_chr" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="512" Height="1024" Canvas.Top="0"/>
+								<Rectangle x:Name="rect_chr_shade" Width="512" Height="1024" Fill="Black" Opacity="0"/>
+								<Image x:Name="img_chr_sel" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="32" Height="32"/>
+								<Rectangle x:Name="rect_chr_sel2" Width="32" Height="32" Stroke="Red" StrokeThickness="2" Visibility="Hidden"/>
+								<Rectangle x:Name="rect_chr_sel1" Width="32" Height="32" Canvas.Left="0" Canvas.Top="0" Stroke="White" StrokeThickness="2" Visibility="Hidden"/>
+								<Rectangle x:Name="rect_chr_hover" Width="32" Height="32" Stroke="White" StrokeThickness="1" Visibility="Hidden"/>
+							</Canvas>
+						</Canvas>
+					</StackPanel>
+					
+					<!-- color picker -->
+					<StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+						<Canvas x:Name="canvas_color_picker" Width="512" Height="128" Margin="0, 0, 0, 10" MouseMove="canvas_color_picker_MouseMove" MouseLeave="canvas_color_picker_MouseLeave" MouseLeftButtonDown="canvas_color_picker_MouseLeftButtonDown">
+							<Image x:Name="img_colors"/>
+							<Rectangle x:Name="rect_isolate_color" Width="512" Height="128" Visibility="Collapsed"/>
+							<Rectangle x:Name="rect_color_picker_sel" Stroke="White" StrokeThickness="2" Width="32" Height="32" Visibility="Hidden"/>
+							<Grid x:Name="grid_color_picker_hex" Width="32px" Height="32px">
+								<Label x:Name="label_color_picker_hex" Foreground="White" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+							</Grid>
+							<Label Canvas.Right="0" TextBlock.TextAlignment="Right" Foreground="{StaticResource brush_light3}">Color mode</Label>
+							<Label x:Name="label_color_mode" Canvas.Right="0" Canvas.Top="20" TextBlock.TextAlignment="Right" Foreground="White">Wikipedia</Label>
+						</Canvas>
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+		</StackPanel>
+	</Grid>
+</Window>

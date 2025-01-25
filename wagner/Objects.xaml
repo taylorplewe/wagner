@@ -1,0 +1,134 @@
+﻿<Window x:Name="window_objects" x:Class="Wagner.Objects"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wagner"
+        mc:Ignorable="d"
+        Title="Objects" SizeToContent="WidthAndHeight"
+		Style="{StaticResource style_window}"
+		ResizeMode="NoResize" MouseDown="window_objects_MouseDown" KeyDown="window_objects_KeyDown">
+    <Grid>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid x:Name="grid_top_bar" Background="Transparent">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+				<Label x:Name="label_title" Style="{StaticResource style_title_label}">Objects</Label>
+				<Button x:Name="button_close" Style="{StaticResource style_button_window_control}" Grid.Column="2" Click="button_close_Click">×</Button>
+			</Grid>
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<StackPanel x:Name="panel_settings" Canvas.Left="0" Orientation="Horizontal">
+					<ScrollViewer x:Name="scroller_settings" VerticalScrollBarVisibility="Hidden">
+						<StackPanel Orientation="Vertical" Width="256" Height="512" Background="{StaticResource brush_form}">
+							<StackPanel Orientation="Vertical" Margin="0,0,0,0" Background="{StaticResource brush_light1}">
+								<Label>Draw mode</Label>
+								<StackPanel Orientation="Vertical" Margin="8,8,0,8">
+									<RadioButton x:Name="radio_tile" IsChecked="True" GroupName="group_draw_mode">Tile</RadioButton>
+									<StackPanel Orientation="Vertical" Margin="8,0,0,0">
+										<CheckBox x:Name="checkbox_flip_hor">Flip horizontally</CheckBox>
+										<CheckBox x:Name="checkbox_flip_ver">Flip vertically</CheckBox>
+									</StackPanel>
+									<RadioButton x:Name="radio_palette" GroupName="group_draw_mode">Palette</RadioButton>
+								</StackPanel>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>Zoom</Label>
+								<StackPanel Orientation="Horizontal" Margin="8,8,8,8">
+									<TextBox x:Name="textbox_zoom" IsEnabled="False" Margin="12,0,0,0" Width="48"/>
+									<Label Margin="0">%</Label>
+									<Button x:Name="button_zoom_reset" Margin="12,0,0,0" Click="button_zoom_reset_Click">Reset</Button>
+								</StackPanel>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>Object</Label>
+								<StackPanel Orientation="Vertical" Margin="8,8,0,8">
+									<ComboBox x:Name="combobox_objects" Margin="20,0,20,0" SelectionChanged="combobox_objects_SelectionChanged"></ComboBox>
+									<StackPanel Orientation="Horizontal" Margin="20,8,0,0">
+										<Button x:Name="button_new_obj" Click="button_new_obj_Click">New</Button>
+										<Button x:Name="button_remove_obj" Margin="8,0,0,0" Click="button_remove_obj_Click">Remove</Button>
+										<Button x:Name="button_rename_obj" Margin="8,0,0,0" Click="button_rename_obj_Click">Rename</Button>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal" Margin="20,8,0,8">
+										<Label>Width</Label>
+										<TextBox x:Name="textbox_obj_width" Width="40" TextChanged="textbox_obj_width_TextChanged"/>
+										<Label>Height</Label>
+										<TextBox x:Name="textbox_obj_height" Width="40" TextChanged="textbox_obj_height_TextChanged"/>
+									</StackPanel>
+                                </StackPanel>
+							</StackPanel>
+						</StackPanel>
+					</ScrollViewer>
+				</StackPanel>
+				<Grid Grid.Column="1" Background="{StaticResource brush_light1}">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition Height="auto"/>
+					</Grid.RowDefinitions>
+					<Canvas x:Name="canvas_obj" ClipToBounds="True" MouseDown="canvas_obj_MouseDown" MouseMove="canvas_obj_MouseMove" MouseUp="canvas_obj_MouseUp" MouseWheel="canvas_obj_MouseWheel">
+						<Viewbox x:Name="viewbox_obj">
+							<Image x:Name="img_obj" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+						</Viewbox>
+						<Rectangle x:Name="rect_obj_border" StrokeThickness="1" Stroke="{StaticResource brush_light3}"/>
+						<Rectangle x:Name="rect_map_sel" StrokeThickness="1" Visibility="Hidden"/>
+					</Canvas>
+					<Grid Grid.Row="1" Margin="0,12,0,12">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<StackPanel Orientation="Vertical">
+							<StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+								<Label>State</Label>
+								<ComboBox x:Name="combobox_states" Width="180" SelectionChanged="combobox_states_SelectionChanged"></ComboBox>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+								<Button x:Name="button_new_state" Click="button_new_state_Click">New</Button>
+								<Button x:Name="button_remove_state" Margin="8,0,0,0" Click="button_remove_state_Click">Remove</Button>
+								<Button x:Name="button_rename_state" Margin="8,0,0,0" Click="button_rename_state_Click">Rename</Button>
+							</StackPanel>
+							<StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+								<Label>Width</Label>
+								<TextBox x:Name="textbox_state_width" Width="40" TextChanged="textbox_state_width_TextChanged"></TextBox>
+								<Label>Height</Label>
+								<TextBox x:Name="textbox_state_height" Width="40" TextChanged="textbox_state_height_TextChanged"></TextBox>
+							</StackPanel>
+							<StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+								<Label Margin="0,0,4,0">This state is listed</Label>
+								<TextBox x:Name="textbox_state_dup" Width="40" TextChanged="textbox_state_dup_TextChanged"></TextBox>
+								<Label Margin="2,0,0,0">times</Label>
+							</StackPanel>
+						</StackPanel>
+						<StackPanel Grid.Column="1" Margin="12,0,24,0" Orientation="Vertical">
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+								<Label>Frame</Label>
+								<TextBox x:Name="textbox_frame" Width="40" IsEnabled="False"/>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+								<Label># frames</Label>
+								<TextBox x:Name="textbox_num_frames" Width="40" TextChanged="textbox_num_frames_TextChanged"></TextBox>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+								<Label>Speed</Label>
+								<TextBox x:Name="textbox_speed" Width="40" TextChanged="textbox_speed_TextChanged"></TextBox>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+								<Button x:Name="button_play_stop" Click="button_play_stop_Click">Play</Button>
+							</StackPanel>
+						</StackPanel>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
+    </Grid>
+</Window>

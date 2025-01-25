@@ -1,0 +1,28 @@
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\bin\Release\WPF NES Graphics Editor.exe.config
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\bin\Release\WPF NES Graphics Editor.exe
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\bin\Release\WPF NES Graphics Editor.pdb
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\MainWindow.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\App.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor_MarkupCompile.cache
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor_MarkupCompile.lref
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\MainWindow.baml
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor.g.resources
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF_NES_Graphics_Editor.Properties.Resources.resources
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor.csproj.GenerateResource.cache
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor.csproj.CoreCompileInputs.cache
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor.exe
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor.pdb
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\WPF NES Graphics Editor.csproj.AssemblyReference.cache
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Map.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\TilePicker.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\App.baml
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Map.baml
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\TilePicker.baml
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Popup.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Popup.baml
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Metatiles.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Metatiles.baml
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Objects.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\Objects.baml
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\IObjs.g.cs
+C:\Users\tplew\source\repos\WPF NES Graphics Editor\WPF NES Graphics Editor\obj\Release\IObjs.baml

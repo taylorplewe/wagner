@@ -1,0 +1,134 @@
+﻿window bools
+0000 0000
+|||| |||L tile picker visible
+|||| ||L map visible
+|||| |L map maximized
+|||| L metatile visible
+|||L objects visible
+||L iobjects visible
+
+metatile bools
+0000 0000
+|||| |||L using metatiles
+|||| ||L metatile "picking" and not editing
+|||| |L settings panel open
+|||| L x2 (smaller version)
+
+map bools
+0000 0000
+|||| |||L "Tile" mode on
+|||| ||L "Palette" mode on
+|||| |L "Walls" mode on
+|||| L "Objects" mode on
+|||L "I-objects" mode on (if all of the above are off then cam-leads mode is on)
+||L settings panel open
+
+map bools pt. 2
+0000 0000
+|||| |||L walls visible
+|||| ||L objects visible (individual batch checkmarks handled later)
+|||| |L iobjects visible
+|||| L camleads visible
+
+main window .Left		8
+main window .Top		8
+tile picker .Left		8 bytes
+tile picker .Top		8 bytes
+map .Left				8
+map .Top				8
+metatile .Left
+metatile .Top
+objects .Left
+objects .Top
+i-objects .Left
+i-objects .Top
+
+files
+	chr
+	pal
+	map tiles
+	map metas
+	map attrs
+	metatiles
+
+tilePicker stuff
+	palettes
+	sprPalettes
+	selectedPal
+	selectedSprPal
+	bmps
+
+metatiles
+	metatiles
+	metaAttrs
+
+map stuff
+	attrs length (y)
+	attrs[0] length (x)
+	attrs
+	tiles length (y)
+	tiles[0] length (x)
+	tiles
+	metas length (y)
+	metas[0] length (x)
+	metas
+	map.tileXOffset
+	map.tileYOffset
+	map.mapWidth
+	map.mapHeight
+	zoom
+	viewbox_map.CanvasLeft
+	viewbox_map.CanvasTop
+	walls
+
+objects stuff
+	store num objs
+	each obj
+		store name
+		store width
+		store height
+		store num states
+		each state
+			store name
+			store width
+			store height
+			store speed
+			store num frames
+			each frame
+				store tiles
+				store attrs
+				store bmps
+	store selected obj ind
+	store selected state ind
+	store frame
+	objs.viewbox_obj.left
+	objs.viewbox_obj.Top
+	obj window zoom
+	store num map obj batches
+	each batch
+		store if this batch is visible
+		store num objs
+		each obj
+			store obj type
+			store obj x
+			store obj y
+	plrX
+	plrY
+
+i-objects stuff
+	num i-objects
+	each iobj
+		store name
+		store visible
+	store num map iobjs
+	each iobj
+		store type
+		store x
+		store y
+		store width
+		store height
+
+	num camleads
+	each camlead
+		store x
+		store y

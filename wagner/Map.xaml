@@ -1,0 +1,175 @@
+﻿<Window x:Name="window_map" x:Class="Wagner.Map"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wagner"
+        mc:Ignorable="d"
+        Title="Map" Height="768" Width="800"
+		Style="{StaticResource style_window}"
+		ResizeMode="CanResizeWithGrip"
+		MouseDown="window_map_MouseDown"
+		KeyDown="window_map_KeyDown" SizeChanged="window_map_SizeChanged" KeyUp="window_map_KeyUp" Activated="window_map_Activated" Deactivated="window_map_Deactivated" GotKeyboardFocus="window_map_GotKeyboardFocus">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid x:Name="grid_top_bar" Background="Transparent">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+            <Label x:Name="label_title" Style="{StaticResource style_title_label}">Map</Label>
+			<Button x:Name="button_min" Style="{StaticResource style_button_window_control_blank}" Grid.Column="2" Width="48" FontSize="24" Click="button_min_Click">–</Button>
+			<Button x:Name="button_max" Style="{StaticResource style_button_window_control_blank}" Grid.Column="3" Width="48" FontSize="24" Click="button_max_Click">+</Button>
+			<Button x:Name="button_close" Style="{StaticResource style_button_window_control}" Grid.Column="4" Click="button_close_Click">×</Button>
+		</Grid>
+		<Grid Grid.Row="1" Margin="0">
+			<Canvas x:Name="canvas_map" MouseUp="canvas_map_MouseUp" MouseDown="canvas_map_MouseDown" ClipToBounds="True" MouseMove="canvas_map_MouseMove" MouseWheel="canvas_map_MouseWheel">
+				<Viewbox x:Name="viewbox_map" Canvas.Left="0" Canvas.Top="0">
+					<Grid>
+						<Image x:Name="img_map" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor" MouseLeave="img_map_MouseLeave"/>
+						<Image x:Name="img_walls" Visibility="Collapsed" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+						<Grid x:Name="grid_objs">
+							<Image x:Name="img_plr" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+							<Grid></Grid> <!-- batch 0 -->
+						</Grid>
+						<Grid Visibility="Hidden" x:Name="grid_iobjs"/>
+						<Grid Visibility="Hidden" x:Name="grid_camleads"/>
+					</Grid>
+				</Viewbox>
+				<Grid x:Name="grid_grid"></Grid>
+				<Rectangle x:Name="rect_map_sel" StrokeThickness="1" Visibility="Hidden"/>
+				<Rectangle x:Name="rect_title_safe" StrokeThickness="1" Stroke="White" Visibility="Hidden"/>
+				<Rectangle x:Name="rect_measure_8" StrokeThickness="1" Stroke="LightGray" Visibility="Collapsed"/>
+				<Rectangle x:Name="rect_measure_16" StrokeThickness="1" Stroke="Gray" Visibility="Collapsed"/>
+				<Rectangle x:Name="rect_measure_nt" StrokeThickness="1" Stroke="DimGray" Visibility="Collapsed"/>
+				<StackPanel x:Name="panel_measure" Visibility="Collapsed" Canvas.Left="272" Canvas.Top="128" Background="{StaticResource brush_light4}">
+					<TextBlock x:Name="text_measure" Foreground="{StaticResource brush_dark2}" Margin="10">Ben</TextBlock>
+				</StackPanel>
+				<StackPanel x:Name="panel_drawing" Background="{StaticResource brush_form}" Canvas.Left="256" Orientation="Vertical" Height="207">
+					<Label>Drawing</Label>
+					<Grid Margin="10" Background="{StaticResource brush_dark1}">
+						<Label x:Name="label_drawing" HorizontalAlignment="Center" VerticalAlignment="Center">(walls)</Label>
+						<Image x:Name="img_drawing" Width="128" Height="128" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+					</Grid>
+                    <Label x:Name="label_color_mode"></Label>
+				</StackPanel>
+			</Canvas>
+			<Canvas Background="{x:Null}">
+				<StackPanel x:Name="panel_settings" Canvas.Left="0" Orientation="Horizontal">
+					<ScrollViewer x:Name="scroller_settings" VerticalScrollBarVisibility="Hidden">
+						<StackPanel Orientation="Vertical" Width="256" Background="{StaticResource brush_form}">
+							<StackPanel Orientation="Vertical" Margin="0,0,0,0" Background="{StaticResource brush_light1}">
+								<Label>Draw mode</Label>
+								<StackPanel Orientation="Vertical" Margin="8,8,0,8">
+									<RadioButton x:Name="radio_tile" GroupName="group_draw_mode" Checked="radio_tile_Checked">Tile</RadioButton>
+									<RadioButton x:Name="radio_palette" GroupName="group_draw_mode" Checked="radio_palette_Checked">Palette</RadioButton>
+										<CheckBox x:Name="checkbox_attr_from_meta" Visibility="Collapsed" Margin="16,0,0,0" Checked="checkbox_attr_from_meta_Checked" Unchecked="checkbox_attr_from_meta_Unchecked">Pull attribute from metatile</CheckBox>
+									<RadioButton x:Name="radio_walls" GroupName="group_draw_mode" Checked="radio_walls_Checked">Walls</RadioButton>
+									<RadioButton x:Name="radio_objs" GroupName="group_draw_mode" Checked="radio_objs_Checked" Unchecked="radio_objs_Unchecked">Objects</RadioButton>
+										<Label x:Name="label_objs" Visibility="Collapsed" Margin="24,0,0,0">Object:</Label>
+										<ComboBox x:Name="combo_objs" Visibility="Collapsed" Margin="24,0,8,0"></ComboBox>
+										<Label x:Name="label_remobjs" Visibility="Collapsed" Margin="24,0,0,0"></Label>
+									<RadioButton x:Name="radio_iobjs" GroupName="group_draw_mode" Checked="radio_iobjs_Checked" Unchecked="radio_iobjs_Unchecked">I-objects</RadioButton>
+										<Label x:Name="label_iobjs" Visibility="Collapsed" Margin="24,0,0,0">Object:</Label>
+										<ComboBox x:Name="combo_iobjs" Visibility="Collapsed" Margin="24,0,8,0"></ComboBox>
+										<Label x:Name="label_remiobjs" Visibility="Collapsed" Margin="24,0,0,0"></Label>
+                                    <RadioButton x:Name="radio_camleads" GroupName="group_draw_mode" Checked="radio_camleads_Checked" Unchecked="radio_camleads_Unchecked" >Camera leads</RadioButton>
+                                    <StackPanel x:Name="panel_camleads_0" Visibility="Collapsed" Orientation="Vertical" Margin="8,0,0,0">
+                                        <StackPanel Orientation="Horizontal">
+											<Label>Cinematic chain:</Label>
+											<TextBox x:Name="textbox_cin_chain" Width="40" TextChanged="textbox_cin_chain_TextChanged">0</TextBox>
+										</StackPanel>
+										<CheckBox x:Name="checkbox_cin_loc" IsChecked="True">Move to location</CheckBox>
+                                    </StackPanel>
+								</StackPanel>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>Size</Label>
+								<StackPanel Orientation="Horizontal" Margin="8,8,8,8">
+									<Label>Width</Label>
+									<TextBox x:Name="textbox_width" Margin="0,0,4,0" Width="48" TextChanged="textbox_width_TextChanged"/>
+									<Label x:Name="label_width_units" Margin="0">8x8 tiles</Label>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="8,0,8,8">
+									<Label>Height</Label>
+									<TextBox x:Name="textbox_height" Margin="0,0,4,0" Width="48" TextChanged="textbox_height_TextChanged"/>
+									<Label x:Name="label_height_units" Margin="0">8x8 tiles</Label>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="8,0,8,8">
+									<Label VerticalAlignment="Center">Anchor:</Label>
+									<Grid x:Name="grid_anchors" Background="Transparent" MouseLeftButtonDown="grid_anchors_MouseLeftButtonDown" MouseLeave="grid_anchors_MouseLeave" MouseMove="grid_anchors_MouseMove">
+										<Path x:Name="anchor_ul" Style="{StaticResource style_anchor_arrow_ul}"/>
+										<Path x:Name="anchor_ur" Style="{StaticResource style_anchor_arrow_ur}"/>
+										<Path x:Name="anchor_dl" Style="{StaticResource style_anchor_arrow_dl}"/>
+										<Path x:Name="anchor_dr" Style="{StaticResource style_anchor_arrow_dr}"/>
+									</Grid>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="20,0,8,8">
+									<Button x:Name="button_size_apply" IsEnabled="False" Click="button_size_apply_Click">Apply</Button>
+									<Button x:Name="button_size_revert" Margin="8,0,0,0" IsEnabled="False" Click="button_size_revert_Click">Revert</Button>
+								</StackPanel>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>Zoom</Label>
+								<StackPanel Orientation="Horizontal" Margin="8,8,8,8">
+									<TextBox x:Name="textbox_zoom" IsEnabled="False" Margin="12,0,0,0" Width="48"/>
+									<Label Margin="0">%</Label>
+									<Button x:Name="button_zoom_reset" Margin="12,0,0,0" Click="button_zoom_reset_Click">Reset</Button>
+								</StackPanel>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>Grid</Label>
+								<StackPanel Orientation="Vertical" Margin="8,8,0,8">
+									<CheckBox x:Name="checkbox_grid_8x8" Click="checkbox_grid_any_size_Click">8x8</CheckBox>
+									<CheckBox x:Name="checkbox_grid_16x16" Click="checkbox_grid_any_size_Click">16x16</CheckBox>
+									<CheckBox x:Name="checkbox_grid_attribute" Click="checkbox_grid_any_size_Click">Attribute</CheckBox>
+									<CheckBox x:Name="checkbox_grid_nametable" Click="checkbox_grid_any_size_Click">Nametable</CheckBox>
+								</StackPanel>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>Fill</Label>
+								<StackPanel Orientation="Horizontal" Margin="20,8,8,8">
+									<Button x:Name="button_fill_tile" Click="button_fill_tile_Click">Fill with selected tile</Button>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="20,0,8,8">
+									<Button x:Name="button_fill_pal" Click="button_fill_pal_Click">Fill with selected palette</Button>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="20,0,8,8">
+									<Button x:Name="button_fill_wall" Click="button_fill_wall_Click">Fill with wall</Button>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="20,0,8,8">
+									<Button x:Name="button_clear_wall" Click="button_clear_wall_Click">Clear walls</Button>
+								</StackPanel>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>View</Label>
+								<CheckBox x:Name="checkbox_view_grid" Margin="8,0,0,0" Checked="checkbox_view_grid_Checked" Unchecked="checkbox_view_grid_Unchecked">Walls</CheckBox>
+								<CheckBox x:Name="checkbox_view_objs" Margin="8,0,0,0" Checked="checkbox_view_objs_Checked" Unchecked="checkbox_view_objs_Unchecked">Objects</CheckBox>
+								<StackPanel x:Name="panel_view_obj_batches" Visibility="Collapsed" Orientation="Vertical" Margin="16,0,0,8">
+									<CheckBox x:Name="checkbox_view_objs_0" Checked="checkbox_view_batch_Checked" Unchecked="checkbox_view_batch_Unchecked">Batch 0</CheckBox>
+								</StackPanel>
+								<CheckBox x:Name="checkbox_view_iobjs" Margin="8,0,0,0" Checked="checkbox_view_iobjs_Checked" Unchecked="checkbox_view_iobjs_Unchecked">I-objects</CheckBox>
+								<CheckBox x:Name="checkbox_view_camleads" Margin="8,0,0,0" Checked="checkbox_view_camleads_Checked" Unchecked="checkbox_view_camleads_Unchecked">Camera leads</CheckBox>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0,8,0,0" Background="{StaticResource brush_light1}">
+								<Label>Objects</Label>
+								<StackPanel Orientation="Horizontal" Margin="8,0,0,8">
+									<Label>Batch:</Label>
+									<TextBox x:Name="textbox_batch" Width="40" TextChanged="textbox_batch_TextChanged">0</TextBox>
+									<Label># batches:</Label>
+									<TextBox x:Name="textbox_num_batches" Width="40" TextChanged="textbox_num_batches_TextChanged">1</TextBox>
+								</StackPanel>
+							</StackPanel>
+						</StackPanel>
+					</ScrollViewer>
+				</StackPanel>
+			</Canvas>
+		</Grid>
+	</Grid>
+</Window>
